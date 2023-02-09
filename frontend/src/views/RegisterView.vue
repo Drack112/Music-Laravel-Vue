@@ -7,34 +7,79 @@
             Let's get rocking!
           </h1>
           <div class="mb-4">
-            <label
-              class="block uppercase tracking-wide text-xs font-bold mb-2 text-gray-100"
-              >First Name</label
-            >
-            <input
-              class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              type="text"
+            <TextInput
+              label="Fist Name"
+              :label-color="false"
+              placeholder="John"
+              v-model:input="firstName"
+              error="This is an text error"
+              input-type="text"
             />
+            <TextInput
+              label="Last Name"
+              :label-color="false"
+              placeholder="Lock"
+              v-model:input="lastName"
+              error="This is an text error"
+              input-type="text"
+            />
+
+            <TextInput
+              label="Email"
+              :label-color="false"
+              placeholder="superdj@email.com"
+              v-model:input="email"
+              error="This is an text error"
+              input-type="text"
+            />
+
+            <TextInput
+              label="Password"
+              :label-color="false"
+              placeholder="supersecret"
+              v-model:input="password"
+              error="This is an text error"
+              input-type="password"
+            />
+
+            <TextInput
+              label="Confirm Password"
+              :label-color="false"
+              placeholder="supersecret"
+              v-model:input="confirmpassword"
+              error="This is an text error"
+              input-type="password"
+            />
+            <button
+              class="block w-full bg-green-500 text-white rounded-sm py-3 text-sm tracking-wide"
+            >
+              Register
+            </button>
           </div>
-          <span class="test-red-500"> This is an error message </span>
 
-          <button
-            class="block w-full bg-green-500 text-white rounded-sm py-3 text-sm tracking-wide"
-          >
-            Register
-          </button>
+          <p class="text-center text-md text-gray-900">
+            Already have any account?
+            <router-link
+              to="login"
+              class="text-blue-500 no-underline hover:underline"
+            >
+              Login
+            </router-link>
+          </p>
         </div>
-
-        <p class="text-center text-md text-gray-900">
-          Already have any account?
-          <router-link
-            to="login"
-            class="text-blue-500 no-underline hover:underline"
-          >
-            Login
-          </router-link>
-        </p>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import TextInput from "@/components/global/TextInput.vue";
+
+import { ref } from "vue";
+
+const firstName = ref(null);
+const lastName = ref(null);
+const email = ref(null);
+const password = ref(null);
+const confirmpassword = ref(null);
+</script>

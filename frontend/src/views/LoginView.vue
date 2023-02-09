@@ -7,16 +7,24 @@
             Let's get rocking!
           </h1>
           <div class="mb-4">
-            <label
-              class="block uppercase tracking-wide text-xs font-bold mb-2 text-gray-100"
-              >First Name</label
-            >
-            <input
-              class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              type="text"
+            <TextInput
+              label="Email"
+              :label-color="false"
+              placeholder="superdj@email.com"
+              v-model:input="email"
+              error="This is an text error"
+              input-type="text"
+            />
+
+            <TextInput
+              label="Password"
+              :label-color="false"
+              placeholder="supersecret"
+              v-model:input="password"
+              error="This is an text error"
+              input-type="password"
             />
           </div>
-          <span class="test-red-500"> This is an error message </span>
 
           <button
             class="block w-full bg-green-500 text-white rounded-sm py-3 text-sm tracking-wide"
@@ -38,3 +46,12 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import TextInput from "@/components/global/TextInput.vue";
+
+import { ref } from "vue";
+
+const email = ref(null);
+const password = ref(null);
+</script>
