@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <div class="mx-auto py-4">
       <div class="flex flex-wrap font-bold text-gray-100">
         <div class="text-gray-900 text-xl">Youtube Videos</div>
