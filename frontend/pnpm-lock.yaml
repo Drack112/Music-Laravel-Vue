@@ -20,6 +20,7 @@ specifiers:
   register-service-worker: ^1.7.2
   sass: ^1.32.7
   sass-loader: ^12.0.0
+  sweetalert2: ^11.7.1
   tailwindcss: ^3.2.6
   vue: ^3.2.13
   vue-advanced-cropper: ^2.8.8
@@ -29,6 +30,7 @@ dependencies:
   aplayer: 1.10.1
   core-js: 3.27.2
   register-service-worker: 1.7.2
+  sweetalert2: 11.7.1
   vue: 3.2.47
   vue-advanced-cropper: 2.8.8_vue@3.2.47
   vue-router: 4.1.6_vue@3.2.47
@@ -7023,6 +7025,10 @@ packages:
       picocolors: 1.0.0
       stable: 0.1.8
     dev: true
+
+  /sweetalert2/11.7.1:
+    resolution: {integrity: sha512-+1bnkbqBl64FnZmi3g4SzAi4F3pL3S2jF1YQvrysv4GbgizfeFqGkJopxR3FnV/eJm6w2SQ2oAmCxSIBjgP/ag==}
+    dev: false
 
   /table/6.8.1:
     resolution: {integrity: sha512-Y4X9zqrCftUhMeH2EptSSERdVKt/nEdijTOacGD/97EKjhQ/Qs8RTlEGABSJNNN8lac9kheH+af7yAkEWlgneA==}
