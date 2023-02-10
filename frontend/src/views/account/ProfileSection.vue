@@ -4,7 +4,7 @@
       <div class="w-1/3">
         <img
           class="w-full rounded-lg h-auto shadow-lg"
-          src="https://via.placeholder/500"
+          src="https://cdn.discordapp.com/avatars/341293823751618571/e7c7c0bc47ede017378e9749ec264ad4.png?size=1024"
           alt="Profile Pic"
         />
       </div>
@@ -32,6 +32,7 @@
       </div>
     </div>
     <SongSection />
+    <YoutubeVideosSection />
   </div>
 </template>
 
@@ -40,4 +41,5 @@ import SongSection from "@/components/partials/profile/SongSection.vue";
 import RouterLinkButton from "@/components/global/RouterLinkButton.vue";
 import ProfileInfoSection from "@/components/partials/profile/ProfileInfoSection.vue";
 import ProfileAboutSection from "@/components/partials/profile/ProfileAboutSection.vue";
+import YoutubeVideosSection from "@/components/partials/profile/YoutubeVideosSection.vue";
 </script>
