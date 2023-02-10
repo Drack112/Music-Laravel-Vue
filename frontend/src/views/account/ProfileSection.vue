@@ -33,10 +33,12 @@
     </div>
     <SongSection />
     <YoutubeVideosSection />
+    <PostSection />
   </div>
 </template>
 
 <script setup>
+import PostSection from "@/components/partials/profile/PostSection.vue";
 import SongSection from "@/components/partials/profile/SongSection.vue";
 import RouterLinkButton from "@/components/global/RouterLinkButton.vue";
 import ProfileInfoSection from "@/components/partials/profile/ProfileInfoSection.vue";
