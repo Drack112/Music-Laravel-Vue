@@ -2,35 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
         try {
             $user = User::create([
-                'first_name' => $request->input("first_name"),
-                'last_name' => $request->input("last_name"),
-                'email' => $request->input("email"),
-                'password' => Hash::make($request->input("password"))
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password'))
             ]);
 
-            $token = $user->createToken("user_token")->plainTextToken;
+            $token = $user->createToken('user_token')->plainTextToken;
 
-            return response()->json([
-                'user' => $user,
-                'token' => $token,
-            ], 200);
+            return response()->json(['user' => $user, 'token' => $token], 200);
+
         } catch (\Exception $e) {
             return response()->json([
-                "error" => $e->getMessage(),
-                "message" => "Something went wrong in AuthController.register"
-            ], 400);
+                'error' => $e->getMessage(),
+                'message' => 'Something went wrong in AuthController.register'
+            ]);
         }
-        ;
     }
 
     public function login(Request $request)
