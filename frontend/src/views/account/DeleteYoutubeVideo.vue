@@ -7,7 +7,7 @@
       <div class="flex flex-wrap items-center">
         <div class="w-1/4 mr-auto mt-2 text-lg p-1 text-gray-900">
           This is and Yt Video
-          <iframe class="w-full h-20" :src="video.url"></iframe>
+          <iframe class="w-full h-20" src=""></iframe>
         </div>
 
         <div class="w-1/4 ml-auto p-1">
