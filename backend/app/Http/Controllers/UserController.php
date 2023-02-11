@@ -29,8 +29,8 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
 
-            $user->first_name = $request->input("firstName");
-            $user->last_name = $request->input("lastName");
+            $user->first_name = $request->input("first_name");
+            $user->last_name = $request->input("last_name");
 
             $user->save();
 

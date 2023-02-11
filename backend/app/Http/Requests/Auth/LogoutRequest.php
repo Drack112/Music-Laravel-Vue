@@ -14,7 +14,7 @@ class LogoutRequest extends FormRequest
     public function rules()
     {
         return [
-            "userId" => "required|integer"
+            "user_id" => "required|integer"
         ];
     }
 }

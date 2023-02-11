@@ -62,7 +62,7 @@ class AuthController extends Controller
     public function logout(LogoutRequest $request)
     {
         try {
-            $user = User::findOrFail($request->input("userId"));
+            $user = User::findOrFail($request->input("user_id"));
 
             $user->tokens()->delete();
 
