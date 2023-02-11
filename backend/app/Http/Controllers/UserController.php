@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
+use App\Services\ImageService;
 
 class UserController extends Controller
 {
@@ -29,8 +30,14 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
 
+            if ($request->hasFile("image")) {
+                (new ImageService)->updateImage($user, $request, "/images/users/", "update");
+            }
+
             $user->first_name = $request->input("first_name");
             $user->last_name = $request->input("last_name");
+            $user->location = $request->input("location");
+            $user->description = $request->input("description");
 
             $user->save();
 
