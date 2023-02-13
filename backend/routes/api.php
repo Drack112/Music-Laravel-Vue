@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -23,4 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get("/user/{id}", [UserController::class, "show"]);
     Route::put("/user/{id}", [UserController::class, "update"]);
+
+    Route::post("songs", [SongController::class, "store"]);
+    Route::delete("songs/{id}/{user_id}/", [SongController::class], "destroy");
 });
