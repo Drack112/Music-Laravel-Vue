@@ -9,6 +9,7 @@
       placeholder="Cool New Song"
       v-model:input="title"
       inputType="text"
+      :error="errors.title ? errors.title[0] : ''"
     />
 
     <div class="w-full">
@@ -35,13 +36,24 @@ import { ref } from "vue";
 import TextInput from "../../components/global/TextInput.vue";
 import SubmitFormButton from "../../components/global/SubmitFormButton.vue";
 import Swal from "../../sweetalert2.js";
+import { useUserStore } from "@/store/user-store";
+import { useSongStore } from "../../store/song-store";
+import axios from "axios";
+import { useRouter } from "vue-router";
+
+const userStore = useUserStore();
+const songStore = useSongStore();
+const router = useRouter();
 
 let title = ref(null);
 let song = ref(null);
 let file = ref(null);
+let errors = ref([]);
+
 const handleFileUpload = () => {
   song.value = file.value.files[0];
 };
+
 const addSong = async () => {
   if (!song.value) {
     Swal.fire(
@@ -49,7 +61,25 @@ const addSong = async () => {
       "You forgot to upload the mp3 file!",
       "warning"
     );
+
     return null;
+  }
+
+  try {
+    let form = new FormData();
+    form.append("user_id", userStore.id);
+    form.append("title", title.value || "");
+    form.append("file", song.value);
+
+    await axios.post("api/songs", form);
+
+    songStore.fetchSongsByUserId(userStore.id);
+
+    setTimeout(() => {
+      router.push("/account/profile/" + userStore.id);
+    }, 200);
+  } catch (err) {
+    errors.value = err.response.data.errors;
   }
 };
 </script>

@@ -6,25 +6,45 @@
 
 <script setup>
 import { onMounted } from "vue";
-import Aplayer from "aplayer";
-
+import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";
+import { useSongStore } from "../../../store/song-store";
+
+const songStore = useSongStore();
+
+let songsList = [];
 
 onMounted(() => {
-  thePlayer();
+  setTimeout(() => {
+    mapSongs();
+  }, 500);
 });
 
+const mapSongs = () => {
+  let newSongs = songStore.songs.map(function (song) {
+    return {
+      name: song.title,
+      artist: songStore.artistName,
+      url:
+        process.env.VUE_APP_API_URL +
+        "songs/" +
+        songStore.artistId +
+        "/" +
+        song.song,
+    };
+  });
+
+  for (let i = 0; i < newSongs.length; i++) {
+    songsList.push(newSongs[i]);
+  }
+
+  thePlayer();
+};
+
 const thePlayer = () => {
-  new Aplayer({
+  new APlayer({
     container: document.getElementById("aplayer"),
-    audio: [
-      {
-        name: "東方ボーカルENG SUBS】Calm and the Storm",
-        artist: "A-ONE",
-        url: "https://www.youtube.com/watch?v=JE1KdsgjI-Y",
-        cover: "https://i.ytimg.com/vi/JE1KdsgjI-Y/maxresdefault.jpg",
-      },
-    ],
+    audio: songsList,
   });
 };
 </script>
