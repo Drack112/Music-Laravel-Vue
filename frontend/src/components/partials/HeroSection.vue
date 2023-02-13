@@ -34,7 +34,7 @@
   <div id="videoDarkOverlay"></div>
 
   <video autoplay muted loop id="myVideo">
-    <source src="../../../public/videos/avicci.mp4" type="video/mp4" />
+    <source src="../../../public/Concert.mp4" type="video/mp4" />
   </video>
 </template>
 
@@ -49,6 +49,7 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
 #myVideo {
   width: 100vw;
   height: 100vh;
@@ -60,6 +61,7 @@
   bottom: 0;
   z-index: -2;
 }
+
 #videoDarkOverlay {
   width: 100vw;
   height: 100vh;

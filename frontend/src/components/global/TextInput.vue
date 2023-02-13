@@ -1,10 +1,11 @@
 <template>
-  <div class="mb-4">
+  <div>
     <label
-      class="block uppercase tracking-wide text-xs font-bold mb-2 text-gray-100"
-      :class="labelColor ? 'text-gray-900' : 'text-gray-100'"
-      >{{ label }}</label
+      class="block uppercase tracking-wide text-xs font-bold mb-2"
+      :class="[labelColor ? 'text-gray-900' : 'text-gray-100']"
     >
+      {{ label }}
+    </label>
     <input
       :placeholder="placeholder"
       class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -21,6 +22,7 @@
 import { defineProps, defineEmits, toRefs, computed } from "vue";
 
 const emit = defineEmits(["update:input"]);
+
 const props = defineProps({
   label: String,
   labelColor: { type: Boolean, default: true },

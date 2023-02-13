@@ -21,14 +21,15 @@
 import { computed, defineProps, defineEmits, toRefs } from "vue";
 
 const emit = defineEmits(["update:description"]);
+
 const props = defineProps({
   label: String,
   description: String,
   placeholder: { type: String, default: "" },
   error: String,
 });
-
 const { label, description, placeholder, error } = toRefs(props);
+
 const descriptionComputed = computed({
   get: () => description.value,
   set: (val) => emit("update:description", val),
