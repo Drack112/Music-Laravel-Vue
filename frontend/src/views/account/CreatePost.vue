@@ -18,6 +18,7 @@
           placeholder="Awesome Concert!!!"
           v-model:input="title"
           inputType="text"
+          :error="errors.title ? errors.title[0] : ''"
         />
       </div>
       <div class="w-full md:w-1/2 px-3">
@@ -26,6 +27,7 @@
           placeholder="Madrid, ES"
           v-model:input="location"
           inputType="text"
+          :error="errors.location ? errors.location[0] : ''"
         />
       </div>
     </div>
@@ -73,8 +75,16 @@ import TextArea from "../../components/global/TextArea.vue";
 import CropperModal from "../../components/global/CropperModal.vue";
 import SubmitFormButton from "../../components/global/SubmitFormButton.vue";
 import DisplayCropperButton from "../../components/global/DisplayCropperButton.vue";
-
+import { useUserStore } from "../../store/user-store";
+import { usePostStore } from "../../store/post-store";
+import { useRouter } from "vue-router";
+import axios from "axios";
 import Swal from "../../sweetalert2";
+
+const userStore = useUserStore();
+const postStore = usePostStore();
+const router = useRouter();
+
 let showModal = ref(false);
 let title = ref(null);
 let location = ref(null);
@@ -82,12 +92,15 @@ let description = ref(null);
 let imageData = null;
 let image = ref(null);
 let errors = ref([]);
+
 const setCroppedImageData = (data) => {
   imageData = data;
   image.value = data.imageUrl;
 };
+
 const createPost = async () => {
   errors.value = [];
+
   if (imageData === null) {
     Swal.fire(
       "No cropped image found?",
@@ -96,8 +109,10 @@ const createPost = async () => {
     );
     return null;
   }
+
   let data = new FormData();
-  data.append("user_id", "");
+
+  data.append("user_id", userStore.id || "");
   data.append("title", title.value || "");
   data.append("location", location.value || "");
   data.append("description", description.value || "");
@@ -108,6 +123,22 @@ const createPost = async () => {
     data.append("width", imageData.width || "");
     data.append("left", imageData.left || "");
     data.append("top", imageData.top || "");
+  }
+
+  try {
+    await axios.post("api/posts/", data);
+
+    Swal.fire(
+      "New post created!",
+      'The post you created was called "' + title.value + '"',
+      "success"
+    );
+
+    await postStore.fetchPostsByUserId(userStore.id);
+
+    router.push("/account/profile/" + userStore.id);
+  } catch (err) {
+    errors.value = err.response.data.errors;
   }
 };
 </script>
