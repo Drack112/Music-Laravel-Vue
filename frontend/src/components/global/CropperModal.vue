@@ -80,15 +80,14 @@
 <script setup>
 import { ref, defineEmits, defineProps, toRefs } from "vue";
 import { Cropper } from "vue-advanced-cropper";
-
 import "vue-advanced-cropper/dist/style.css";
 
 const emit = defineEmits(["croppedImageData", "showModal"]);
+
 const props = defineProps({
   minAspectRatioProp: Object,
   maxAspectRatioProp: Object,
 });
-
 const { minAspectRatioProp, maxAspectRatioProp } = toRefs(props);
 
 let fileInput = ref(null);
@@ -102,6 +101,7 @@ let croppedImageData = {
   left: null,
   top: null,
 };
+
 const getUploadedImage = (e) => {
   const file = e.target.files[0];
   uploadedImage.value = URL.createObjectURL(file);
@@ -109,12 +109,14 @@ const getUploadedImage = (e) => {
 
 const crop = () => {
   const { coordinates, canvas } = cropper.value.getResult();
+
   croppedImageData.file = fileInput.value.files[0];
   croppedImageData.imageUrl = canvas.toDataURL();
   croppedImageData.height = coordinates.height;
   croppedImageData.width = coordinates.width;
   croppedImageData.left = coordinates.left;
   croppedImageData.top = coordinates.top;
+
   emit("croppedImageData", croppedImageData);
   emit("showModal", false);
 };

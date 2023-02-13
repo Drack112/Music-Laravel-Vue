@@ -9,6 +9,7 @@
 
 <script setup>
 import { defineProps, toRefs } from "vue";
+
 const props = defineProps({ btnText: String });
 const { btnText } = toRefs(props);
 </script>
