@@ -7,21 +7,27 @@
       <div v-for="post in posts" :key="post" class="my-4">
         <div class="flex items-center py-2">
           <router-link :to="'/account/profile/' + post.user.id">
-            <img class="rounded-full" width="50" />
+            <img
+              :src="userStore.userImage(post.user.image)"
+              class="rounded-full"
+              width="50"
+            />
           </router-link>
           <div class="ml-2 font-bold text-2xl">
             <router-link :to="'/account/profile/' + post.user.id">
-              Aoba
+              {{ post.user.first_name }} {{ post.user.last_name }}
             </router-link>
           </div>
         </div>
-        <img class="w-full" alt="" />
+        <img class="w-full" :src="postStore.postImage(post.image)" alt="" />
         <div class="p-4">
           <p class="text-3xl font-bold hover:text-gray-700 pb-4">
             {{ post.title }}
           </p>
-          <p class="py-2 text-lg">Event Location: Madri</p>
-          <p class="pb-6">Description</p>
+          <p class="py-2 text-lg">Event Location: {{ post.location }}</p>
+          <p class="pb-6">
+            {{ post.description }}
+          </p>
         </div>
       </div>
 
@@ -32,6 +38,7 @@
           :pages="pageCount"
           :range-size="1"
           active-color="#337aff"
+          @update:modelValue="getPosts"
         />
       </div>
     </div>
@@ -39,9 +46,32 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import axios from "axios";
+import { onMounted, ref } from "vue";
+import { usePostStore } from "@/store/post-store";
+import { useUserStore } from "@/store/user-store";
+
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
+
+const postStore = usePostStore();
+const userStore = useUserStore();
 
 let page = ref(1);
 let posts = ref(null);
 let pageCount = ref(null);
+
+onMounted(async () => {
+  await getPosts();
+});
+
+const getPosts = async () => {
+  try {
+    let res = await axios.get("api/posts?page=" + page.value);
+    pageCount.value = res.data.page_count;
+    posts.value = res.data.paginate.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 </script>

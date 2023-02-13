@@ -13,6 +13,6 @@
 </style>
 
 <script setup>
-import TopNavigation from "@/components/structure/TopNavigation.vue";
-import FooterSection from "@/components/structure/ FooterSection.vue";
+import TopNavigation from "../components/structure/TopNavigation.vue";
+import FooterSection from "../components/structure/FooterSection.vue";
 </script>
