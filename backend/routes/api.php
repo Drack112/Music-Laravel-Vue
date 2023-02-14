@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostsByUserController;
 use App\Http\Controllers\SongByUserController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
@@ -39,8 +40,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('posts', [PostController::class, 'index']);
     Route::get('posts/{id}', [PostController::class, 'show']);
-    Route::post('posts', [PostController::class,  'store']);
+    Route::post('posts', [PostController::class, 'store']);
     Route::put('posts/{id}', [PostController::class, 'update']);
     Route::delete('posts/{id}', [PostController::class, 'destroy']);
+
+    Route::get('user/{user_id}/posts', [PostsByUserController::class, 'show']);
 
 });
